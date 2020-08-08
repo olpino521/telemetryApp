@@ -1,0 +1,29 @@
+# Javascript-4
+
+# *** PG18 T4 Cloud Computing  - Lt Sonar - CloudData ***
+---------------------------------------
+Omar Leonardo Pino Reyes
+
+24 July 2020
+
+Firebase connection for the Lt sonar game
+
+[demo-client] (http://localhost:4000) after downloading and installing in local machine
+	by: run npm client
+
+# Download/Install
+---------------------------------------
+
+https://github.com/olpino521/JavaScript-3/tree/client-server
+
+-Install npm
+-Run using npm run client for the vue client
+-Open localhost:4000
+
+
+# *** How to use ***
+---------------------------------------
+-Open localhost:4000 in web browser to enter the game client
+-On the first page you are prompted to enter player name and role. This will send and get the data to the 
+firebase 
+

@@ -1,37 +1,36 @@
-<!--Copyright (C) 2020. Omar Pino. All Rights Reserved-->
-
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/chart">Chart</router-link> |
-      <router-link to="/admin">Admin</router-link>
-    </div>
-    <router-view/>
+  <div class="about">
+    <h1>Chart</h1>
+
   </div>
 </template>
-
 <script>
     // typical Vue component controller defined and registered here
     import Controller from '@/../lib/controller'
 
-    class AppController extends Controller {
+    class AdminController extends Controller {
 
         constructor( name, subComponentList = []) {
             super( name, subComponentList );
             this.vm = {
-                title: 'Telemetry',
-                subtitle: ''
+                buildId: 1234,
+                playerId: 0,
+                pos: {x: 0, y:0},
+                action: 0
             }
+            this.props = {};
+        }
+
+        saveRec(){
+          //Save in firebase
         }
     }
 
     // export a definition for this view
-    export default new AppController('App', {});
+    export default new AdminController('telemetryAdmin', {});
 
 </script>
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
