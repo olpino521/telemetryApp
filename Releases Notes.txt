@@ -1,29 +1,28 @@
 # Javascript-4
 
-# *** PG18 T4 Cloud Computing  - Lt Sonar - CloudData ***
+# *** PG18 T4 Cloud Computing  - Telemetry - CloudData ***
 ---------------------------------------
 Omar Leonardo Pino Reyes
 
-24 July 2020
+7 August 2020
 
-Firebase connection for the Lt sonar game
+Firebase connection for the telemetry App
 
-[demo-client] (http://localhost:4000) after downloading and installing in local machine
-	by: run npm client
+[demo-client] (http://localhost:8080) after downloading and installing in local machine
+	by: run npm serve
 
 # Download/Install
 ---------------------------------------
 
-https://github.com/olpino521/JavaScript-3/tree/client-server
+https://github.com/olpino521/telemetryApp
 
 -Install npm
--Run using npm run client for the vue client
--Open localhost:4000
+-Run using npm run serve
+-Open localhost:8080
 
 
 # *** How to use ***
 ---------------------------------------
--Open localhost:4000 in web browser to enter the game client
--On the first page you are prompted to enter player name and role. This will send and get the data to the 
-firebase 
+-Open localhost:8080 in web browser to enter the app
+-There are multiple pages with Vue basic stuff. The one that works is the Admin one.
 
