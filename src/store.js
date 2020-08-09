@@ -28,13 +28,21 @@ const cloud = new Connection()
 const store = new Vuex.Store({ 
     state: {
         currentRec: new TelemetryRecord(),
-        telemetryArray: []
+        telemetryArray: [],
+        stringRecords: "",
     }, 
     mutations: {
         SET_CURRENT_RECORD: (state, newRecord) => {
             state.currentRec = newRecord
             state.telemetryArray.push(newRecord)
-        }
+        },
+        SET_RECORDS: (state, loadedRecords) => {
+            state.stringRecords = loadedRecords
+        },
+        SET_TM: (state, records) => {
+            state.telemetryArray = records
+        },
+        CLEAR_RECORDS: (state) => state.telemetryArray = []
     }, 
     actions: {
         async updateRecord({commit}, newRec){
@@ -45,11 +53,28 @@ const store = new Vuex.Store({
                 console.log(err)
                 return
             })
+        },
+        async getRecords({commit}){
+            
+            let get = await cloud.get('telemetry')
+            .catch(err => {
+                console.log(err)
+                return
+            })
+            commit('SET_RECORDS', get)
+            
+        },
+        clearRecords({commit}){
+            commit('CLEAR_RECORDS')
+        },
+        setTMRecords({commit}, telemetry){
+            commit('SET_TM', telemetry)
         }
     }, 
     getters: {
         getCurrentRecord: state => state.currentRec,
-        getTelemetryArray: state => state.telemetryArray
+        getTelemetryArray: state => state.telemetryArray,
+        getStringRecords: state => state.stringRecords,
     } 
 });
 

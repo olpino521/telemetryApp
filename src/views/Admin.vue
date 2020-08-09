@@ -19,33 +19,36 @@
       <br />
       <input type="submit" value="Save" />
     </form>
-    <li v-for="item in saveRecords" :key="item">{{item}}</li>
+    <button @click="loadTelemetryData">Load</button>
+    <li v-for="item in savedRecords" :key="item">{{item}}</li>
   </div>
 </template>
 <script>
 // typical Vue component controller defined and registered here
 import Controller from "@/../lib/controller";
-import TelemetryRecord from "@/../lib/TelemetryRecord"
+import TelemetryRecord from "@/../lib/TelemetryRecord";
 
 class AdminController extends Controller {
   constructor(name, subComponentList = []) {
     super(name, subComponentList);
     this.vm = {
       currentRecord: new TelemetryRecord(),
-      saveRecords: []
+      savedRecords: []
     };
     this.props = {};
 
-    this.injectActions(['updateRecord']);
-    this.injectGetters(['getCurrentRecord'])
-  }
-
-  compute_records() {
-    return this.saveRecords;
+    this.injectActions(["updateRecord"]);
+    this.injectActions(["getRecords"]);
+    this.injectActions(["setTMRecords"]);
+    this.injectActions(["clearRecords"]);
+    this.injectGetters(["getCurrentRecord"]);
+    this.injectGetters(["getTelemetryArray"]);
+    this.injectGetters(["getStringRecords"]);
   }
 
   saveRec() {
     //Save in firebase
+    this.loadTelemetryData();
     let position = {
       x: parseInt(this.currentRecord.pos.x),
       y: parseInt(this.currentRecord.pos.y)
@@ -55,11 +58,39 @@ class AdminController extends Controller {
       parseInt(this.currentRecord.playerId),
       position,
       parseInt(this.currentRecord.action),
-      this.saveRecords.length
+      this.getTelemetryArray.length
     );
-    this.updateRecord(tRec)
+    this.updateRecord(tRec);
+
     let recString = tRec.asString();
-    this.saveRecords.push(recString);
+    this.savedRecords.push(recString);
+  }
+
+  loadTelemetryData() {
+    this.clearRecords();
+    this.savedRecords = [];
+    return new Promise((resolve, reject) => {
+      this.getRecords();
+      try {
+        JSON.parse(this.getStringRecords)
+      } catch (error) {
+        console.log("Press the load button again. The promise had not finished retreving data")
+        return;
+      }
+      let array = JSON.parse(this.getStringRecords);
+      console.log(array)
+      let tmArray = [];
+      array.forEach(element => {
+        let td = new TelemetryRecord();
+        td.data = element;
+        td.count = element.count;
+        tmArray.push(td);
+      });
+      this.setTMRecords(tmArray)
+      tmArray.forEach(element =>{
+        this.savedRecords.push(element.asString());
+      })
+    });
   }
 }
 
