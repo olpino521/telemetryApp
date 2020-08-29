@@ -1,12 +1,12 @@
 # Javascript-4
 
-# *** PG18 T4 Cloud Computing  - Telemetry - CloudData ***
+# *** PG18 T4 Cloud Computing  - Telemetry - Charts ***
 ---------------------------------------
 Omar Leonardo Pino Reyes
 
-7 August 2020
+28 August 2020
 
-Firebase connection for the telemetry App
+Chart display for the telemetry App
 
 [demo-client] (http://localhost:8080) after downloading and installing in local machine
 	by: run npm serve
@@ -24,5 +24,8 @@ https://github.com/olpino521/telemetryApp
 # *** How to use ***
 ---------------------------------------
 -Open localhost:8080 in web browser to enter the app
--There are multiple pages with Vue basic stuff. The one that works is the Admin one.
+-In the Admin page you can find a small form to save new data for the charts
+-To load the charts you may need to press the load button multiple times
+-The charts page works using the saved data in firebase
+-Press the laod button, sometimes more than once again, and 4 charts will appear with the data that wassaved in firebase
 
